@@ -102,6 +102,7 @@
 import express from 'express';
 import data from './data.js';
 
+
 const app = express();
 
 
@@ -111,6 +112,7 @@ import seedRouter from './routes/seedRoutes.js';
 import productRouter from './routes/productRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import orderRouter from './routes/orderRoutes.js';
+import cors from "cors"
 
 dotenv.config();
 
@@ -124,6 +126,10 @@ mongoose
   });
 
 // Middleware to set CORS headers
+
+
+app.use(cors())
+
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5174');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
