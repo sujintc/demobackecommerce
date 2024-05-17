@@ -139,7 +139,7 @@ mongoose
 
 const allowedOrigins = [
   'http://localhost:5174', // Local development
-  'https://demofrontecommerce-hsgi1tjc7-sujins-projects-71bd002f.vercel.app/' // Deployed frontend
+  'https://demofrontecommerce.vercel.app/' // Deployed frontend
 ];
 
 app.use(cors({
