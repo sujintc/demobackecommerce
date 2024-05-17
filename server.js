@@ -128,17 +128,31 @@ mongoose
 // Middleware to set CORS headers
 
 
-app.use(cors((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5174');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-}))
+// app.use(cors((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5174');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   next();
+// }))
 
-// app.use();
+// // app.use();
 
+const allowedOrigins = [
+  'http://localhost:5174', // Local development
+  'https://demofrontecommerce-2h7t.vercel.app' // Deployed frontend
+];
 
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true); // Allow requests with no origin (like mobile apps or curl requests)
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified origin.';
 
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
