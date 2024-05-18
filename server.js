@@ -134,9 +134,7 @@ mongoose
 //   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 //   next();
 // }))
-
-// // app.use();
-app.use(cors())
+app.use(cors());
 
 // const allowedOrigins = [
 //   'http://localhost:5174', // Local development
